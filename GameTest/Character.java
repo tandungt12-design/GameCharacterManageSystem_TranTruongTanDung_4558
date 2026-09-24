@@ -3,23 +3,33 @@ package GameTest;
 import java.util.Scanner;
 
 public abstract class Character implements ICharacter {
-	protected String id;
-	protected String name;
-	protected Weapon weapon;
-	protected double baseDameged;
-	protected double healthPoint;
+	private String id;
+	private String name;
+	private Weapon weapon;
+	private double baseDameged;
+	private double healthPoint;
 
-	// 2. Constructors
 	public Character() {
-		this.weapon = new Weapon(); // Ensure the weapon object always exists
+		this.weapon = new Weapon();
+		this.id="";
+		this.name="";
+		this.baseDameged=0;
+		this.healthPoint=0;
 	}
 
-	public Character(String id, String name, double baseDameged, double healthPoint, Weapon weapon) {
+	public Character(String id, String name, double baseDameged, double healthPoint, String nameWeapon,
+			double bonusDameged) {
 		this.id = id;
 		this.name = name;
 		this.baseDameged = baseDameged;
 		this.healthPoint = healthPoint;
-		this.weapon = weapon;
+		weapon = new Weapon(nameWeapon, bonusDameged);
+	}
+	public double getWeaponDameged() {
+		return this.weapon.getBonusDameged();
+	}
+	public String getWeaponName() {
+		return this.weapon.getNameWeapon();
 	}
 
 	// 3. Getters / Setters
@@ -75,28 +85,43 @@ public abstract class Character implements ICharacter {
 
 		while (true) {
 			System.out.print("Enter HP (Requirement: 2000-4000): ");
-			double value = sc.nextDouble();
-			sc.nextLine();
-			if (value >= 2000 && value <= 4000) {
-				this.setHealthPoint(value);
-				break;
+			double value;
+			try {
+				value = sc.nextDouble();
+
+				sc.nextLine();
+
+				if (value >= 2000 && value <= 4000) {
+					this.setHealthPoint(value);
+					break;
+				} else {
+					System.out.println("Wrong value - Enter again");
+
+				}
+			} catch (Exception E) {
+				System.out.println("Not identify this value - Enter again");
+				sc.nextLine();
+				value = 0;
 			}
-			else {
-				System.out.println("Wrong Value - Enter Again");
-			}
+
 		}
 
 		while (true) {
 			System.out.print("Enter base damage (0 < value <= 150): ");
-			double value = sc.nextDouble();
-			sc.nextLine();
-			if (value > 0 && value <= 150) {
-				this.setBaseDameged(value);
-				break;
+			try {
+				double value = sc.nextDouble();
+				sc.nextLine();
+				if (value > 0 && value <= 150) {
+					this.setBaseDameged(value);
+					break;
+				} else {
+					System.out.println("Wrong Value - Enter Again");
+				}
+			} catch (Exception E) {
+				System.out.println("Not identify this value - Enter again");
+				sc.nextLine();
 			}
-			else {
-				System.out.println("Wrong Value - Enter Again");
-			}
+
 		}
 
 		System.out.println("--- Enter Weapon Information ---");
@@ -104,7 +129,7 @@ public abstract class Character implements ICharacter {
 	}
 
 	public abstract double damegedCaculate();
+
 	public abstract void displayInfo();
-	public abstract void attack();
 
 }

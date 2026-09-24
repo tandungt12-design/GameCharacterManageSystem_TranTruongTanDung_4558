@@ -38,15 +38,21 @@ public class Weapon {
 
 		while (true) {
 			System.out.print("Enter bonus damage (0 < value <= 150): ");
-			double value = sc.nextDouble();
-			sc.nextLine();
-			if (value > 0 && value <= 150) {
-				this.setBonusDameged(value);
-				break;
+			try {
+				double value = sc.nextDouble();
+				sc.nextLine();
+				if (value > 0 && value <= 150) {
+					this.setBonusDameged(value);
+					break;
+				} else {
+					System.out.println("Wrong Value - Enter Again");
+				}
+
+			} catch (Exception E) {
+				System.out.println("Not identify this value - Enter again");
+				sc.nextLine();
 			}
-			else {
-				System.out.println("Wrong Value - Enter Again");
-			}
+
 		}
 	}
 

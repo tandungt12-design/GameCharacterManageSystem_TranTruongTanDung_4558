@@ -4,5 +4,5 @@ public interface ICharacter {
 	void addInfo();
 	void displayInfo();
 	double damegedCaculate();
-	void attack();
+	
 }
