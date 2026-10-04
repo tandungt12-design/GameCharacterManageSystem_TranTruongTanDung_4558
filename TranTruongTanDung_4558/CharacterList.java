@@ -125,18 +125,6 @@ public class CharacterList {
 		}
 		return total;
 	}
-	public void insertIndex(int index, Character chara) {
-		list.add(index, chara);
-	}
-	public boolean checkOverBound(int length) {
-		if(length > list.size()) {
-			System.out.println("OverBound to insert");
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
 
 	public void updateInfo(String id) {
 		if (list.isEmpty()) {

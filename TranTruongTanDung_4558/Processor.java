@@ -31,7 +31,6 @@ public class Processor {
 			System.out.println("7. Delete character by ID");
 			System.out.println("8. Calculate total team combat power");
 			System.out.println("9. Update Information");
-			System.out.println("10. Insert index");
 			System.out.println("0. Exit program");
 			System.out.println("----------------------------------------");
 			System.out.print("Please select a function (0-8): ");
@@ -82,40 +81,6 @@ public class Processor {
 				System.out.println("Enter id to update: ");
 				String updId = sc.nextLine();
 				manager.updateInfo(updId);
-			case 10:
-
-				System.out.println("Enter index: ");
-				int index=0;
-				try {
-					 index = sc.nextInt();
-					sc.nextLine();
-				}
-				catch(Exception E) {
-					System.out.println("Wrong value - Please Enter a number value");
-					sc.nextLine();
-					index = -3;
-					break;
-				}
-				
-				boolean isOverBound = manager.checkOverBound(index);
-				if (isOverBound == true) {
-					System.out.println("1. Attacker   2. Magician");
-					int chooseInsert = sc.nextInt();
-					sc.nextLine();
-					Character chara = null;
-					if (chooseInsert == 1) {
-						chara = new Attacker();
-					} else if (chooseInsert == 2) {
-						chara = new Magician();
-					}
-					chara.addInfo();
-					manager.insertIndex(index, chara);
-					System.out.println("Completely");
-				} else {
-					System.out.println("Can't do");
-				}
-				break;
-
 			case 0:
 				System.out.println("Exited the program. Goodbye!");
 				break;

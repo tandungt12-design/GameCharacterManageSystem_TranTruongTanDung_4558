@@ -1,4 +1,4 @@
-package GameTest;
+package TranTruongTanDung_4558;
 
 public interface ICharacter {
 	void addInfo();
